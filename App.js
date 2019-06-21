@@ -1,38 +1,40 @@
 import React, { Component } from 'react';
-// import { AppRegistry, Image } from 'react-native';
 import { AppRegistry, Text, View } from 'react-native'
 
-// class Bananas extends Component {
-//   render() {
-//     let pic = {
-//       uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
-//     };
-//     return (
-//         <Image source={pic} style={{width: 193, height: 110}} />
-//       );
-//   }
-// }
+class Blink extends Component {
+  componentDidMount() {
+    setInterval(() => (
+      this.setState(previousState => (
+        { isShowingText: !previousState.isShowingText }
+      ))
+    ), 1000);
+  }
 
-class Greeting extends Component {
+  state = { isShowingText: true };
+
+  render() {
+
+    if (!this.state.isShowingText) {
+      return null;
+    }
+
+    return (
+      <Text>{this.props.text}</Text>
+    );
+  }
+}
+
+class BlinkApp extends Component {
   render() {
     return (
-      <View style={{alignItems: "center"}}>
-        <Text>Cześć {this.props.name}!</Text>
+      <View>
+        <Blink text='I love to blink' />
+        <Blink text='Yes blinking is so great' />
+        <Blink text='Why did they ever take this out of HTML' />
+        <Blink text='Look at me look at me look at me' />
       </View>
     );
   }
 }
 
-class LostOfGreetings extends Component {
-  render() {
-    return (
-      <View style={{alignItems: 'center', top: 50}}>
-        <Greeting name='Jakub' />
-        <Greeting name='Paulina' />
-        <Greeting name='Sabina' />
-      </View>
-    );
-  }
-}
-
-export default LostOfGreetings
+export default BlinkApp
